@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
         initRV();
     }
 
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<MyModel> list = new ArrayList<>();
     private RvAdapter adapter;
 
     private void initRV() {
         for (int i = 0; i < 100; i++) {
-            list.add("Zein "+i);
+            list.add(new MyModel(i, "Zein "+i));
         }
 
         adapter = new RvAdapter();

@@ -18,15 +18,15 @@ import java.util.List;
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyHolder> implements Filterable {
 
     //todo 3
-    private ArrayList<String> list;
-    private ArrayList<String> listFilter;
+    private ArrayList<MyModel> list;
+    private ArrayList<MyModel> listFilter;
 
     public RvAdapter(){
 
     }
 
     //todo 2
-    public void setList(ArrayList<String> list) {
+    public void setList(ArrayList<MyModel> list) {
         this.list = list;
         this.listFilter = new ArrayList<>(list);
     }
@@ -41,7 +41,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyHolder> implemen
     //todo 7
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        String d = list.get(position);
+        MyModel d = list.get(position);
         holder.bind(d);
     }
 
@@ -62,8 +62,8 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyHolder> implemen
         }
 
         //todo 8
-        public void bind(String d) {
-            binding.tv.setText(d);
+        public void bind(MyModel d) {
+            binding.tv.setText(d.getNama() + " - " +d.getNo());
         }
     }
 
@@ -75,14 +75,14 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyHolder> implemen
     private final Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<String> fildteredList = new ArrayList<>();
+            List<MyModel> fildteredList = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
                 fildteredList.addAll(listFilter);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (String item : listFilter) {
-                    if (item.toString().toLowerCase().contains(filterPattern)) {
+                for (MyModel item : listFilter) {
+                    if (item.getNama().toLowerCase().contains(filterPattern)) {
                         fildteredList.add(item);
                     }
                 }
